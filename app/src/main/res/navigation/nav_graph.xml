@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/saisirDonneesFragment">
+
+    <fragment
+        android:id="@+id/saisirDonneesFragment"
+        android:name="com.example.fizz_buzz.ui.fragments.SaisirDonneesFragment"
+        android:label="SaisirDonneesFragment">
+        <action
+            android:id="@+id/action_saisirDonneesFragment_to_resultatsFragment"
+            app:destination="@id/resultatsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultatsFragment"
+        android:name="com.example.fizz_buzz.ui.fragments.ResultatsFragment"
+        android:label="ResultatsFragment" />
+</navigation>

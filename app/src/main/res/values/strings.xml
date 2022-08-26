@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Fizz-Buzz</string>
+    <string name="affiche_resultats">Affiche Résultats</string>
+    <string name="mot_2">Mot 2</string>
+    <string name="mot_1">Mot 1</string>
+    <string name="entier_2">Entier 2</string>
+    <string name="entier_1">Entier 1</string>
+</resources>
