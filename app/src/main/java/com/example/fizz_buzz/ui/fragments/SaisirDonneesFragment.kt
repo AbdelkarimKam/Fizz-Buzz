@@ -12,25 +12,30 @@ import com.example.fizz_buzz.ui.activity.UserIntent
 import com.example.jetpacktrainning.ui.fragments.BaseFragment
 
 
-class SaisirDonneesFragment : BaseFragment<SaisirDonnesLayoutBinding>(SaisirDonnesLayoutBinding::inflate) {
+class SaisirDonneesFragment :
+    BaseFragment<SaisirDonnesLayoutBinding>(SaisirDonnesLayoutBinding::inflate) {
 
     private val donneesSaisieViewModel: ResultatViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-      //  binding.donnees = donneesSaisieViewModel.donneesSaisie.value
         binding.afficheResultats.setOnClickListener {
+            donneesSaisieViewModel.intentChannel.trySend(
+                UserIntent.AfficheResultats(
+                    DonneesSaisie(
+                        binding.entier1.editText?.text?.toString()?.toInt() ?: 3,
+                        binding.entier2.editText?.text?.toString()?.toInt() ?: 5,
+                        binding.mot1.editText?.text.toString(),
+                        binding.mot2.editText?.text.toString()
+                    )
+                )
+            )
             displayFragmentCountry()
-            donneesSaisieViewModel.intentChannel.trySend(UserIntent.AfficheResultats(DonneesSaisie(
-              Integer.getInteger(binding.entier1.editText?.text.toString()  )?:1,
-              Integer.getInteger(binding.entier2.editText.toString())?:1  ,
-                binding.mot1.editText?.text.toString(),
-                binding.mot2.editText?.text.toString()
-            ) ))
         }
     }
 
-    private fun displayFragmentCountry() = findNavController().navigate(R.id.action_saisirDonneesFragment_to_resultatsFragment)
+    private fun displayFragmentCountry() =
+        findNavController().navigate(R.id.action_saisirDonneesFragment_to_resultatsFragment)
 
 }

@@ -28,7 +28,7 @@ class ResultatsFragment : BaseFragment<ResultatsLayoutBinding>(ResultatsLayoutBi
         super.onViewCreated(view, savedInstanceState)
 
 
-        val items = resultatViewModel.items
+        val items = resultatViewModel.pagingDataFlow
         val resultatAdapter = ResultatAdapter()
 
         binding.bindAdapter(resultatAdapter = resultatAdapter)
