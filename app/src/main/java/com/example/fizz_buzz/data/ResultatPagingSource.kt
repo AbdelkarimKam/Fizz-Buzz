@@ -22,19 +22,18 @@ class ResultatPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Resultat> {
         // If params.key is null, it is the first load, so we start loading with STARTING_KEY
         val position = params.key ?: STARTING_KEY
-        return try {
-            val resultats = donneSaisieService.getLotDeResltats(query,position, params.loadSize)
+        val range = position.until(position + params.loadSize)
 
-            val range = position.until(position + params.loadSize)
-
-            LoadResult.Page(
-                data = resultats,
-                prevKey = if (position == STARTING_KEY) null else position - 1,
-                nextKey = range.last + 1
-            )
-        } catch (e: Exception) {
-            return LoadResult.Error(e)
-        }
+        return LoadResult.Page(
+            data = range.map { number ->
+                Resultat(
+                    id = number,
+                    text = donneSaisieService.getResultText(number, query)
+                )
+            },
+            prevKey = if (position == STARTING_KEY) null else position - 1,
+            nextKey = range.last + 1
+        )
     }
 
     // The refresh key is used for the initial load of the next PagingSource, after invalidation

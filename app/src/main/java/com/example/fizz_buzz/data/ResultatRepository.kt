@@ -20,6 +20,6 @@ class ResultatRepository(private val service: IDonneesSaisieService) {
     }
 
     companion object {
-        const val ITEMS_PER_PAGE = 100
+        const val ITEMS_PER_PAGE = 40
     }
 }

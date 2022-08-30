@@ -21,16 +21,14 @@ class SaisirDonneesFragment :
         super.onViewCreated(view, savedInstanceState)
 
         binding.afficheResultats.setOnClickListener {
-            donneesSaisieViewModel.intentChannel.trySend(
-                UserIntent.AfficheResultats(
-                    DonneesSaisie(
-                        binding.entier1.editText?.text?.toString()?.toInt() ?: 3,
-                        binding.entier2.editText?.text?.toString()?.toInt() ?: 5,
-                        binding.mot1.editText?.text.toString(),
-                        binding.mot2.editText?.text.toString()
-                    )
+            donneesSaisieViewModel.accept(                UserIntent.AfficheResultats(
+                DonneesSaisie(
+                    binding.entier1.editText?.text?.toString()?.toInt() ?: 3,
+                    binding.entier2.editText?.text?.toString()?.toInt() ?: 5,
+                    binding.mot1.editText?.text.toString(),
+                    binding.mot2.editText?.text.toString()
                 )
-            )
+            ))
             displayFragmentCountry()
         }
     }
