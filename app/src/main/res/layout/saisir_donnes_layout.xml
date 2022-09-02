@@ -11,6 +11,8 @@
         android:id="@+id/entier_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:helperTextEnabled="true"
+        app:helperTextTextColor="@color/design_default_color_error"
         app:layout_constraintBottom_toTopOf="@+id/entier_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,6 +28,8 @@
         android:id="@+id/entier_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:helperTextEnabled="true"
+        app:helperTextTextColor="@color/design_default_color_error"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entier_1">
@@ -40,6 +44,8 @@
         android:id="@+id/mot_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:helperTextEnabled="true"
+        app:helperTextTextColor="@color/design_default_color_error"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entier_2">
@@ -54,6 +60,8 @@
         android:id="@+id/mot_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:helperTextEnabled="true"
+        app:helperTextTextColor="@color/design_default_color_error"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mot_1">

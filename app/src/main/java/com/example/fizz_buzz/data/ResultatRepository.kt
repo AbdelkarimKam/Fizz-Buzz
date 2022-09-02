@@ -4,7 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.fizz_buzz.localservice.IDonneesSaisieService
-import com.example.fizz_buzz.model.DonneesSaisie
+import com.example.fizz_buzz.domain.model.DonneesSaisie
 import kotlinx.coroutines.flow.Flow
 
 

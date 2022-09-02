@@ -1,6 +1,6 @@
 package com.example.fizz_buzz.localservice
 
-import com.example.fizz_buzz.model.DonneesSaisie
+import com.example.fizz_buzz.domain.model.DonneesSaisie
 
 class DonneesSaisieService : IDonneesSaisieService {
 

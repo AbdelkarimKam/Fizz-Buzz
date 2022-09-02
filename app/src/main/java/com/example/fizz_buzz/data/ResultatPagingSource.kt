@@ -3,7 +3,7 @@ package com.example.fizz_buzz.data
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.fizz_buzz.localservice.IDonneesSaisieService
-import com.example.fizz_buzz.model.DonneesSaisie
+import com.example.fizz_buzz.domain.model.DonneesSaisie
 import kotlin.math.max
 
 // The initial key used for loading.

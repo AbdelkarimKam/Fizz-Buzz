@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fizz_buzz.databinding.ResultatsLayoutBinding
-import com.example.fizz_buzz.ui.activity.ResultatViewModel
+import com.example.fizz_buzz.ui.viewmodel.ResultatViewModel
 import com.example.fizz_buzz.ui.adapter.ResultatAdapter
 import com.example.jetpacktrainning.ui.fragments.BaseFragment
 import kotlinx.coroutines.flow.collectLatest
