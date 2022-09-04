@@ -14,7 +14,6 @@ import com.example.fizz_buzz.domain.use_case.ValidationMot
 import com.example.fizz_buzz.localservice.DonneesSaisieService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -22,8 +21,6 @@ class ResultatViewModel : ViewModel() {
     private val repository = ResultatRepository(DonneesSaisieService())
     private val validationEntier: ValidationEntier = ValidationEntier()
     private val validationMot: ValidationMot = ValidationMot()
-
-    private val _switchFragment = MutableLiveData<Boolean>(false)
 
     private val _entier1IsError = MutableLiveData<Boolean>()
     private val _entier1ErrorText = MutableLiveData<String?>()
@@ -36,9 +33,6 @@ class ResultatViewModel : ViewModel() {
 
     private val _mot2IsError = MutableLiveData<Boolean>()
     private val _mot2ErrorText = MutableLiveData<String?>()
-
-    val switchFragment: LiveData<Boolean>
-        get() = _switchFragment
 
     val entier1IsError: LiveData<Boolean>
         get() = _entier1IsError
@@ -62,11 +56,11 @@ class ResultatViewModel : ViewModel() {
 
     val pagingDataFlow: Flow<PagingData<Resultat>>
 
+    val inputDataFlow: Flow<Boolean>
+
     /**
      * Processor of side effects from the UI which in turn feedback into [state]
      */
-    val accept: (UserIntent) -> Unit
-
     val actionStateFlow: MutableStateFlow<UserIntent> by lazy {
         MutableStateFlow(UserIntent.DonneesInput(null, null, null, null))
     }
@@ -81,9 +75,14 @@ class ResultatViewModel : ViewModel() {
             .flatMapLatest { repository.resultatPagingSource(query = it.donneesSaisie) }
             .cachedIn(viewModelScope)
 
-        accept = {
-            when (it) {
-                is UserIntent.DonneesInput -> {
+        val actions = actionStateFlow
+            .filterIsInstance<UserIntent.DonneesInput>()
+            .distinctUntilChanged()
+
+        inputDataFlow = actions
+            .flatMapLatest {
+               flow<Boolean> {
+                    emit(false)
                     val entier1Result = validationEntier.execute(it.entier1)
                     val entier2Result = validationEntier.execute(it.entier2)
                     val mot1Result = validationMot.execute(it.mot1)
@@ -107,22 +106,19 @@ class ResultatViewModel : ViewModel() {
                     ).any { successful -> !successful }
 
                     if (!hasError) {
-                        viewModelScope.launch {
-                            actionStateFlow.emit(
-                                UserIntent.AfficheResultats(
-                                    DonneesSaisie(
-                                        entier1Result.data!!.toInt(),
-                                        entier2Result.data!!.toInt(),
-                                        mot1Result.data!!,
-                                        mot2Result.data!!
-                                    )
+                        actionStateFlow.emit(
+                            UserIntent.AfficheResultats(
+                                DonneesSaisie(
+                                    entier1Result.data!!.toInt(),
+                                    entier2Result.data!!.toInt(),
+                                    mot1Result.data!!,
+                                    mot2Result.data!!
                                 )
                             )
-                        }
-                        _switchFragment.value = true
+                        )
+                        emit(true)
                     }
                 }
             }
-        }
     }
 }
